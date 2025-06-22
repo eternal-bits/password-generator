@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Generator</title>
+  <link rel="stylesheet" href="password-generator.css" />
+</head>
+<body>
+<div class="container">
+  <h2>Password Generator</h2>
+  <div class="result-container">
+    <span id="result"></span>
+    <button class="btn" id="clipboard" title="Copy to clipboard">
+      📋
+    </button>
+  </div>
+  <div class="settings">
+    <div class="setting">
+      <label for="length">Password Length</label>
+      <input type="number" id="length" min="4" max="20" value="12" />
+    </div>
+    <div class="setting">
+      <label for="uppercase">Include uppercase letters</label>
+      <input type="checkbox" id="uppercase" checked />
+    </div>
+    <div class="setting">
+      <label for="lowercase">Include lowercase letters</label>
+      <input type="checkbox" id="lowercase" checked />
+    </div>
+    <div class="setting">
+      <label for="numbers">Include numbers</label>
+      <input type="checkbox" id="numbers" checked />
+    </div>
+    <div class="setting">
+      <label for="symbols">Include symbols</label>
+      <input type="checkbox" id="symbols" checked />
+    </div>
+  </div>
+  <button class="btn btn-large" id="generate">Generate Password</button>
+</div>
+<script src="script.js"></script>
+<div style="position:fixed; bottom:1.5rem; right:1.5rem; z-index:1000; background:#23235b; padding:8px; border-radius:18px; width:240px; height:160px; box-shadow:0 2px 8px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center;">
+  <iframe src="https://eternalsportfolio.vercel.app/" width="220" height="140" style="border:none; border-radius:12px;"></iframe>
+</div>
+</body>
+</html>
