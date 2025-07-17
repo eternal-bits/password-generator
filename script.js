@@ -1,4 +1,26 @@
 const resultEl = document.getElementById('result');
+
+// Dynamic random text animation
+let randomTextInterval = null;
+function startRandomTextAnimation() {
+  if (randomTextInterval) clearInterval(randomTextInterval);
+  randomTextInterval = setInterval(() => {
+    resultEl.innerText = Array.from({length: 12}, () => {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+      return chars[Math.floor(Math.random() * chars.length)];
+    }).join('');
+  }, 100);
+}
+
+function stopRandomTextAnimation() {
+  if (randomTextInterval) {
+    clearInterval(randomTextInterval);
+    randomTextInterval = null;
+  }
+}
+
+// Start animation on load
+startRandomTextAnimation();
 const lengthEl = document.getElementById('length');
 const uppercaseEl = document.getElementById('uppercase');
 const lowercaseEl = document.getElementById('lowercase');
@@ -47,6 +69,7 @@ function generatePassword(lower, upper, number, symbol, length) {
   return generatedPassword.slice(0, length);
 }
 
+
 generateBtn.addEventListener('click', () => {
   const length = +lengthEl.value;
   const hasLower = lowercaseEl.checked;
@@ -55,8 +78,10 @@ generateBtn.addEventListener('click', () => {
   const hasSymbol = symbolsEl.checked;
 
   const password = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
+  stopRandomTextAnimation();
   resultEl.innerText = password;
 });
+
 
 clipboardBtn.addEventListener('click', () => {
   const password = resultEl.innerText;
@@ -67,6 +92,13 @@ clipboardBtn.addEventListener('click', () => {
       clipboardBtn.innerText = "📋";
     }, 1000);
   });
+});
+
+// If user clears the password, restart animation
+resultEl.addEventListener('DOMSubtreeModified', () => {
+  if (!resultEl.innerText) {
+    startRandomTextAnimation();
+  }
 });
 
 // ===========================
